@@ -1,0 +1,318 @@
+Python 3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+t1 = (1, 2, 3)
+t2 = (4, 5, 6)
+
+t1 + t2
+(1, 2, 3, 4, 5, 6)
+t1 = (1, 2, 3)
+t2 = (4, 5, 6)
+id(t1)
+2355683674304
+id(t2)
+2355683674944
+
+t1 = t1 + t2
+t1
+(1, 2, 3, 4, 5, 6)
+id(t1)
+2355677118528
+
+#-----------------------------------------------------------------------
+
+l = ['hello']
+type(l)
+<class 'list'>
+
+t = ('hello')
+type(t)
+<class 'str'>
+
+t = ('hello',)
+type(t)
+<class 'tuple'>
+
+t = (10, 20, 10, 20,20, 10, 40)
+t.count(20)
+3
+
+t.index(20)
+1
+
+#----------------------------------------------------------------
+SETS
+
+set_ = {10, 20, True, 'hai', False, 9.8, (1, 2, 3)}
+set_
+{False, True, 20, 9.8, 10, (1, 2, 3), 'hai'}
+
+
+set_ = {10, 20, True, 'hai', [False, 9.8], (1, 2, 3)}
+Traceback (most recent call last):
+  File "<pyshell#29>", line 1, in <module>
+    set_ = {10, 20, True, 'hai', [False, 9.8], (1, 2, 3)}
+TypeError: unhashable type: 'list'
+
+#-------------------------------------------------------------
+hash('a')
+-4836082211182647674
+hash('h')
+7505898544878668657
+hash('i')
+-3508197355580778834
+hash('hai')
+2619946124382081275
+
+hash(10)
+10
+
+hash(987654356789)
+987654356789
+
+
+hash(['hai', 'hello', 'python', 'selenium'])
+Traceback (most recent call last):
+  File "<pyshell#40>", line 1, in <module>
+    hash(['hai', 'hello', 'python', 'selenium'])
+TypeError: unhashable type: 'list'
+
+
+l = ['hai', 'hello', 'python', 'selenium']
+hash(l)
+Traceback (most recent call last):
+  File "<pyshell#43>", line 1, in <module>
+    hash(l)
+TypeError: unhashable type: 'list'
+
+
+hash(l[0])
+2619946124382081275
+hash(l[2])
+3703464546144088306
+
+#----------------------------------------------------
+hash(1)
+1
+hash(True)
+1
+
+hash(0)
+0
+hash(False)
+0
+
+#----------------------------------------------------
+a = {1, 2, 3}
+b = {2, 4, 6}
+
+## union()
+a.union(b)
+{1, 2, 3, 4, 6}
+a
+{1, 2, 3}
+b
+{2, 4, 6}
+
+# union method will not modify any sets
+# union operation will take place in some other memory
+
+
+a = {1, 2, 3}
+b = {2, 4, 6}
+c = {1, 3, 5, 7}
+a.union(b, c)
+{1, 2, 3, 4, 5, 6, 7}
+
+#--------------------------------------------------------------
+
+# union update
+a = {1, 2, 3}
+b = {2, 4, 6}
+a.update(b)			#a is baseset
+a
+{1, 2, 3, 4, 6}
+b
+{2, 4, 6}
+# update method will modify the baseset
+
+s1 = {10, 20, 330}
+s2 = {20, 330, 110, 200}
+s2.update(s1)       #s2 is baseset
+s2
+{10, 20, 200, 330, 110}
+
+#---------------------------------------------------
+
+#intersection()
+a = {10, 20, 30}
+b = {10, 30, 50}
+a.intersection(b)
+{10, 30}
+
+a = {10, 20, 30}
+b = {1, 2, 3}
+a.intersection(b)
+set()
+
+a
+{10, 20, 30}
+b
+{1, 2, 3}
+
+#intersection will give the common elements present in both sets
+#intersection will not modify any set
+
+
+#---------------------
+#intersection_update
+a = {10, 20, 30}
+b = {10, 30, 50}
+a.intersection_update(b)
+a
+{10, 30}
+
+#--------------
+#difference()
+a = {10, 20, 30}
+b = {10, 30, 50}
+a.difference(b)     #{20}
+{20}
+
+a = {10, 20, 30}
+b = {10, 30, 50}
+b.difference(a)
+{50}
+
+#------------------------
+#difference_update
+a = {10, 20, 30}
+b = {10, 30, 50}
+a.difference_update(b)
+a
+{20}
+
+a = {10, 20, 30}
+b = {10, 30, 50}
+b.difference_update(a)
+b
+{50}
+
+#-------------------------
+#symmetric difference
+a = {10, 20, 30}
+b = {10, 30, 50}
+a.symmetric_difference(b)       #{20, 50}
+{50, 20}
+
+#symmetric_difference_update
+a = {10, 20, 30}
+b = {10, 30, 50}
+b.symmetric_difference_update(a)
+b
+{50, 20}
+
+#--------------------------------
+#add()
+a = {10, 20, 30}
+a.add(15)
+a
+{10, 20, 30, 15}
+
+a.add(15, 200)
+Traceback (most recent call last):
+  File "<pyshell#144>", line 1, in <module>
+    a.add(15, 200)
+TypeError: set.add() takes exactly one argument (2 given)
+
+a.add((1, 2, 3, 4))
+a
+{10, 15, (1, 2, 3, 4), 20, 30}
+
+#-------------------------------
+#remove()
+a = {10, 20, 30}
+a.remove(20)
+a
+{10, 30}
+
+a.remove(50)
+Traceback (most recent call last):
+  File "<pyshell#155>", line 1, in <module>
+    a.remove(50)
+KeyError: 50
+#-----------------------------
+#discard()
+a = {10, 20, 30, 40, 50, 60}
+a.discard(30)
+a
+{50, 20, 40, 10, 60}
+a.discard(100)
+a
+{50, 20, 40, 10, 60}
+
+
+#-----------------------------
+#pop()
+a = {10, 20, 30, 40, 50, 60}
+a.pop()
+50
+a
+{20, 40, 10, 60, 30}
+a.pop()
+20
+a
+{40, 10, 60, 30}
+a.pop()
+40
+a.pop()
+10
+a
+{60, 30}
+
+#pop removes random key from the set
+
+#---------------------------------------------
+
+a = {10, 20, 30, 40, 50, 60}
+b = {20, 40, 60}
+## issubset()
+b.issubset(a)
+True
+a.issubset(b)
+False
+
+#-----------------------
+issuperset()
+Traceback (most recent call last):
+  File "<pyshell#187>", line 1, in <module>
+    issuperset()
+NameError: name 'issuperset' is not defined
+
+
+#-------------------
+#issuperset()
+a = {10, 20, 30, 40, 50, 60}
+b = {20, 40, 60}
+a.issuperset(b)
+True
+b.issuperset(a)
+False
+>>> 
+>>> #------------------
+>>> #isdisjoint()
+>>> a = {10, 20, 30}
+>>> b = {40, 50, 60}
+>>> a.isdisjoint(b)
+True
+>>> 
+>>> a = {10, 20, 30, 40, 50, 60}
+>>> b = {20, 40, 60}
+>>> a.isdisjoint(b)
+False
+>>> 
+>>> #-----------------
+>>> #clear()
+>>> a = {10, 20, 30, 40, 50, 60}
+>>> a.clear()
+>>> a
+set()

@@ -1,0 +1,207 @@
+Python 3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+#different ways of creating a dict
+d1 = dict(Bengaluru=23, Tumkur=25, Gulbarga=40)
+d1
+{'Bengaluru': 23, 'Tumkur': 25, 'Gulbarga': 40}
+
+
+## list of tuples
+d2 = dict([('Bengaluru', 23), ('Tumkur', 25), ('Gulbarga', 40)])
+d2
+{'Bengaluru': 23, 'Tumkur': 25, 'Gulbarga': 40}
+
+## tuple of tuples
+d2 = dict((('Bengaluru', 23), ('Tumkur', 25), ('Gulbarga', 40)))
+d2
+{'Bengaluru': 23, 'Tumkur': 25, 'Gulbarga': 40}
+
+## dict_name[key] = value
+d2['Shimoga'] = 35
+d2
+{'Bengaluru': 23, 'Tumkur': 25, 'Gulbarga': 40, 'Shimoga': 35}
+
+#---------------
+## composite keys
+## If we have tuples as keys, we call them as composite keys
+d = {}
+d[('1', 'April')] = 'fools day'
+d
+{('1', 'April'): 'fools day'}
+
+#------------------------------------------------
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+## Accessing key value pairs from dict
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+## dictname[key]
+d['name']
+'Ram'
+d['bonus']
+15000
+
+d['Ayodhya']
+Traceback (most recent call last):
+  File "<pyshell#32>", line 1, in <module>
+    d['Ayodhya']
+KeyError: 'Ayodhya'
+
+d['salary'] = 60000
+d
+{'name': 'Ram', 'age': 30, 'place': 'Ayodhya', 'salary': 60000, 'bonus': 15000}
+
+d['empid'] = 1234
+d
+{'name': 'Ram', 'age': 30, 'place': 'Ayodhya', 'salary': 60000, 'bonus': 15000, 'empid': 1234}
+d['age'] = 40
+d
+{'name': 'Ram', 'age': 40, 'place': 'Ayodhya', 'salary': 60000, 'bonus': 15000, 'empid': 1234}
+
+## If the key is already present, it will modify the value. If the key
+## is not present, it will add the key-value pair
+
+#--------------------------------
+#Dict methods
+#get()
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+d.get('name')
+'Ram'
+d.get('salary')
+40000
+d.get('project_name')
+print(d.get('project_name'))
+None
+d
+{'name': 'Ram', 'age': 30, 'place': 'Ayodhya', 'salary': 40000, 'bonus': 15000}
+## If the key is not present, it will not give KeyError. Instead it will
+## give None
+## get method willnot modify the original dict
+
+#-----------------------------
+# set_default()
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+d.set_default('name')
+Traceback (most recent call last):
+  File "<pyshell#61>", line 1, in <module>
+    d.set_default('name')
+AttributeError: 'dict' object has no attribute 'set_default'. Did you mean: 'setdefault'?
+d.setdefault('name')
+'Ram'
+d.setdefault('bonus')
+15000
+print(d.setdefault('dob'))
+None
+d
+{'name': 'Ram', 'age': 30, 'place': 'Ayodhya', 'salary': 40000, 'bonus': 15000, 'dob': None}
+print(d.setdefault('project name', 'Value not set'))
+Value not set
+d
+{'name': 'Ram', 'age': 30, 'place': 'Ayodhya', 'salary': 40000, 'bonus': 15000, 'dob': None, 'project name': 'Value not set'}
+
+## setdefault() will give the value of the corresponding key.
+## If the key is not present, it will give None also it will modify the original dict
+
+#-------------------------
+#keys()
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+d.keys()
+dict_keys(['name', 'age', 'place', 'salary', 'bonus'])
+
+#-----------------------
+#values()
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+d.values()
+dict_values(['Ram', 30, 'Ayodhya', 40000, 15000])
+
+#------------------------
+#items()
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+d.items()
+dict_items([('name', 'Ram'), ('age', 30), ('place', 'Ayodhya'), ('salary', 40000), ('bonus', 15000)])
+
+#----------------------
+#update()
+d = {'zeel':282, 'Itc':300, 'idea':8}
+d.update({'mrf':80000, 'bharti airtel':680})
+d
+{'zeel': 282, 'Itc': 300, 'idea': 8, 'mrf': 80000, 'bharti airtel': 680}
+
+#----------------------
+#fromkeys()
+names = ['red', 'blue', 'green', 'pink', 'white', 'black']
+names.fromkeys(names)
+Traceback (most recent call last):
+  File "<pyshell#100>", line 1, in <module>
+    names.fromkeys(names)
+AttributeError: 'list' object has no attribute 'fromkeys'
+dict.fromkeys(names)
+{'red': None, 'blue': None, 'green': None, 'pink': None, 'white': None, 'black': None}
+dict.fromkeys(names, 1000)
+{'red': 1000, 'blue': 1000, 'green': 1000, 'pink': 1000, 'white': 1000, 'black': 1000}
+{'red': 1000, 'blue': 1000, 'green': 1000, 'pink': 1000, 'white': 1000, 'black': 1000}
+{'red': 1000, 'blue': 1000, 'green': 1000, 'pink': 1000, 'white': 1000, 'black': 1000}
+
+
+a = 'python'
+dict.fromkeys(a)
+{'p': None, 'y': None, 't': None, 'h': None, 'o': None, 'n': None}
+
+
+#---------------------------
+#pop()
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+d.pop('name')
+'Ram'
+d
+{'age': 30, 'place': 'Ayodhya', 'salary': 40000, 'bonus': 15000}
+d.pop('bonus')
+15000
+d
+{'age': 30, 'place': 'Ayodhya', 'salary': 40000}
+d.pop()
+Traceback (most recent call last):
+  File "<pyshell#117>", line 1, in <module>
+    d.pop()
+TypeError: pop expected at least 1 argument, got 0
+d.pop('dob')
+Traceback (most recent call last):
+  File "<pyshell#118>", line 1, in <module>
+    d.pop('dob')
+KeyError: 'dob'
+d.pop('dob', 'key not found')
+'key not found'
+
+#----------------------------------
+#popitem()
+d = {'name':'Ram', 'age':30, 'place':'Ayodhya', 'salary':40000, 'bonus':15000}
+d.popitem()
+('bonus', 15000)
+d
+{'name': 'Ram', 'age': 30, 'place': 'Ayodhya', 'salary': 40000}
+d.popitem('place')
+Traceback (most recent call last):
+  File "<pyshell#126>", line 1, in <module>
+    d.popitem('place')
+TypeError: dict.popitem() takes no arguments (1 given)
+
+#-----------------------------------
+## merge two dictionaries
+d1 = {'one':1, 'two':2, 'three':3}
+d2 = {1:'one', 2:'two', 3:'three'}
+>>> d3 = {**d1, **d2}
+>>> d3
+{'one': 1, 'two': 2, 'three': 3, 1: 'one', 2: 'two', 3: 'three'}
+>>> 
+>>> d4 = d1 | d2
+>>> d4
+{'one': 1, 'two': 2, 'three': 3, 1: 'one', 2: 'two', 3: 'three'}
+>>> 
+>>> d1 = {'one':1, 'two':2, 'three':3}
+>>> d2 = {1:'one', 2:'two', 3:'three'}
+>>> d3 = {10:10, 20:20, 30:30}
+>>> d5  = d1 | d2 | d3
+>>> d5
+{'one': 1, 'two': 2, 'three': 3, 1: 'one', 2: 'two', 3: 'three', 10: 10, 20: 20, 30: 30}
+>>> 
+>>> d6 = {**d1, **d2, **d3}
+>>> d6
+{'one': 1, 'two': 2, 'three': 3, 1: 'one', 2: 'two', 3: 'three', 10: 10, 20: 20, 30: 30}
